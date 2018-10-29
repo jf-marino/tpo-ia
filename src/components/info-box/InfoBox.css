@@ -1,0 +1,33 @@
+.info-container {
+    background: #edf0f5;
+    padding: 0;
+    border: 1px solid #8e8e93;
+}
+
+.info-container > table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.heading {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+}
+
+.heading th {
+    text-align: left;
+    padding: 20px 30px;
+}
+
+.body tr {
+    border-bottom: 1px solid #dedede;
+}
+
+.body td {
+    padding: 15px 30px;
+    word-wrap: break-word;
+    vertical-align: top;
+    text-align: left;
+    border-bottom: #000;
+}
