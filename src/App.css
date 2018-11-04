@@ -1,1 +1,9 @@
 @import '~antd/dist/antd.css';
+
+.main-layout { 
+    margin: 10px;
+}
+
+.title {
+    color: #fff;
+}
