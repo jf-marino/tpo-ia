@@ -6,4 +6,9 @@
 
 .title {
     color: #fff;
+    display: inline-block;
+}
+
+.right-menu {
+    float: right;
 }
