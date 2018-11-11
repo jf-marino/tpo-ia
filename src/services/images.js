@@ -1,10 +1,11 @@
 import axios from 'axios';
-import { IMAGES_SERVICE_URL, IMAGES_SERVICE_KEY } from '../config';
+import { IMAGES_SERVICE_URL, IMAGE_SERVICE_ITERATION_ID, IMAGES_SERVICE_PREDICTION_KEY } from '../config';
 
 
 let config = {
     url: IMAGES_SERVICE_URL,
-    key: IMAGES_SERVICE_KEY
+    iteration: IMAGE_SERVICE_ITERATION_ID,
+    key: IMAGES_SERVICE_PREDICTION_KEY
 };
 
 export const setConfig = (arg) => config = { ...config, ...arg };
@@ -19,15 +20,19 @@ export const analyze = async ({ buffer }) => {
 	try {
         const res = await axios({
             method: 'post',
-            url: `${config.url}?visualFeatures=Categories,Description,Color`,
+            url: `${config.url}?iterationId=${config.iteration}`,
             data: buffer,
             headers: {
-                'Ocp-Apim-Subscription-Key': config.key,
+                'Prediction-Key': config.key,
                 'Content-Type': 'application/octet-stream'
             }
         });
-        return res.data;
+        return res.data.predictions.map(prediction => ({
+            probability: prediction.probability,
+            name: prediction.tagName
+        }));
     } catch (error) {
         console.log('ERROR', error);
+        throw error;
     }
 };

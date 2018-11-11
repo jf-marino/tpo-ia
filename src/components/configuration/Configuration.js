@@ -11,27 +11,40 @@ export class Configuration extends Component {
             this.props.onChange(newState);
             return newState;
         });
-    }
+    };
 
-    onSubscriptionKeyChange = (e) => {
+    onPredictionKeyChange = (e) => {
         const val = e.target.value;
         this.setState(prev => {
             const newState = { ...prev, key: val };
             this.props.onChange(newState);
             return newState;
         });
-    }
+    };
+
+    onIterationIdChange = (e) => {
+        const val = e.target.value;
+        this.setState(prev => {
+            const newState = { ...prev, iteration: val };
+            this.props.onChange(newState);
+            return newState;
+        });
+    };
 
     render() {
-        const { url, key } = this.state;
+        const { url, key, iteration } = this.state;
         return (
             <div>
                 <label>Backend
                     <Input value={url} onChange={this.onBackendUrlChange} />
                 </label>
                 <Divider />
-                <label>Subscription Key
-                    <Input value={key} onChange={this.onSubscriptionKeyChange} />
+                <label>Iteration Id
+                    <Input value={iteration} onChange={this.onIterationIdChange} />
+                </label>
+                <Divider />
+                <label>Prediction Key
+                    <Input value={key} onChange={this.onPredictionKeyChange} />
                 </label>
             </div>
         );

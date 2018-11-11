@@ -12,14 +12,19 @@ class App extends Component {
   state = {
     uploading: false,
     info: {},
-    config: getConfig()
+    config: getConfig(),
+    error: null
   };
 
   onImageSelected = (image) => {
     this.setState({ uploading: true });
-    analyze({ buffer: image.content }).then(data => {
-      this.setState({ uploading: false, info: data });
-    });
+    analyze({ buffer: image.content })
+      .then(data => {
+        this.setState({ uploading: false, info: data });
+      })
+      .catch(error => {
+        this.setState({ error });
+      });
   };
 
   openConfig = () => {
@@ -59,7 +64,7 @@ class App extends Component {
                 <UploadControls uploading={uploading} onUpload={this.onImageSelected} />
               </Col>
               <Col span={12} push={1}>
-                <InfoBox uploading={uploading} attributes={info} />
+                <InfoBox uploading={uploading} predictions={info} />
               </Col>
             </Row>
           </Content>
